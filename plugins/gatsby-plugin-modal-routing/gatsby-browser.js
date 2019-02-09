@@ -64,15 +64,14 @@ class ReplaceComponentRenderer extends React.Component {
     }) : null
 
     return (
-      <div>
-        <h1>ReplaceComponentRenderer</h1>
+      <>
         {pageElement}
         <Modal
           isOpen={modalElement}
         >
           {modalElement ? modalElement : null}
         </Modal>
-      </div>
+      </>
     )
   }
 }
