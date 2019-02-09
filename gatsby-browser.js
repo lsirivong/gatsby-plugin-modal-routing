@@ -35,14 +35,17 @@ class ReplaceComponentRenderer extends React.Component {
 
     // TODO: handle history changes
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      this.setState({ prevPageResources: prevProps.pageResources })
+      this.setState({
+        prevPageResources: prevProps.pageResources,
+        prevPathname: prevProps.location.pathname
+      })
     }
   }
 
   render() {
     // render modal if props location has modal
     const { pageResources, location, loader } = this.props
-    const { prevPageResources } = this.state
+    const { prevPageResources, prevPathname } = this.state
     const isModal = _.get(location, 'state.modal')
 
     const resources = prevPageResources && isModal ?
@@ -56,6 +59,7 @@ class ReplaceComponentRenderer extends React.Component {
     const modalElement = isModal ? React.createElement(pageResources.component, {
       ...this.props,
       modal: true,
+      modalCloseTo: prevPathname,
       key: pageResources.page.path,
     }) : null
 

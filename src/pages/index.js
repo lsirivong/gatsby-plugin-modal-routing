@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = ({ modal = false }) => (
+const IndexPage = ({ modal = false, modalCloseTo = null }) => (
   <>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h1>Hi people</h1>
