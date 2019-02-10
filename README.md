@@ -41,8 +41,32 @@ pathname of the page where the modal was opened, otherwise `null`.
 
 Example:
 
-```
-todo
+```js
+// pages/modal-example.js
+import React from 'react'
+import { Link } from 'gatsby'
+
+const ModalExamplePage = ({ modal = false, modalCloseTo = null }) => (
+  </div>
+    {modal ? (
+      <Link to={modalCloseTo}>
+        Close
+      </Link>
+    ) : (
+      <header>
+        <h1>
+          Website Title
+        </h1>
+      </header>
+    )}
+
+    <h2>Modal Page</h2>
+
+    <Link to="/">Go back to the homepage</Link>
+  </div>
+)
+
+exports default ModalExamplePage
 ```
 
 ### Opening a page in a modal
