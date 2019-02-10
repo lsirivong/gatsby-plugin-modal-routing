@@ -4,16 +4,20 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const ConditionalLayout = ({ condition, ...rest }) => (
+const ConditionalLayout = ({ condition, children, ...rest }) => (
   condition ? (
-    <Layout { ...rest } />
+    <Layout { ...rest }>
+      {children}
+    </Layout>
   ) : (
-    <React.Fragment { ...rest } />
+    <React.Fragment>
+      {children}
+    </React.Fragment>
   )
 )
 
-const SecondPage = ({ modal = false, modalCloseTo = null }) => (
-  <ConditionalLayout condition={!modal}>
+const SecondPage = ({ location, modal = false, modalCloseTo = null }) => (
+  <ConditionalLayout location={location} condition={!modal}>
     {modal && (
       <Link to={modalCloseTo}>
         Close

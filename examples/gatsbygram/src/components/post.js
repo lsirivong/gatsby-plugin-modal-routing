@@ -31,6 +31,9 @@ class Post extends React.Component {
       <Link
         data-testid="post"
         to={`/${id}/`}
+        state={{
+          modal: true
+        }}
         onTouchStart={() => (touched = true)}
         onMouseEnter={() => {
           if (!touched) {

@@ -5,8 +5,8 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = ({ modal = false, modalCloseTo = null }) => (
-  <Layout>
+const IndexPage = ({ location, modal = false, modalCloseTo = null }) => (
+  <Layout location={location}>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h1>Hi people</h1>
     <p>

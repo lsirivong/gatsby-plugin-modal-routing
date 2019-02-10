@@ -5,7 +5,15 @@ import { StaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children }) => (
+class Layout extends React.Component {
+  componentDidMount() {
+    console.log('LAYOUT MOUNT', this.props.location.pathname)
+  }
+
+  render() {
+
+   const { children } = this.props
+    return (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -38,6 +46,8 @@ const Layout = ({ children }) => (
     )}
   />
 )
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
