@@ -1,18 +1,13 @@
 import React from "react"
+import { Link } from 'gatsby-plugin-modal-routing'
 
 import ConditionalLayout from "../components/ConditionalLayout"
 import SEO from "../components/seo"
-import { Link } from 'gatsby-plugin-modal-routing'
 
-const SecondPage = ({ location, modal = false, modalCloseTo = null }) => (
-  <ConditionalLayout location={location} condition={!modal}>
-    {modal && (
-      <Link to={modalCloseTo}>
-        Close
-      </Link>
-    )}
+const SecondPage = () => (
+  <ConditionalLayout>
     <SEO title="Page two" />
-    <h1>Hi from the second page {modal && "MODAL!"}</h1>
+    <h1>Hi from the second page</h1>
     <p>Welcome to page 2</p>
 
     <ul>

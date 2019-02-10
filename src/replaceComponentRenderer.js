@@ -51,8 +51,6 @@ class ReplaceComponentRenderer extends React.Component {
 
     const modalElement = isModal ? React.createElement(pageResources.component, {
       ...this.props,
-      modal: true,
-      modalCloseTo: prevProps.location.pathname,
       key: pageResources.page.path,
     }) : null
 
