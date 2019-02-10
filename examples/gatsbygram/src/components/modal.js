@@ -1,5 +1,4 @@
 import React from "react"
-import Modal from "react-modal"
 import CaretRight from "react-icons/lib/fa/caret-right"
 import CaretLeft from "react-icons/lib/fa/caret-left"
 import Close from "react-icons/lib/md/close"
@@ -11,8 +10,6 @@ import { push, StaticQuery, graphql } from "gatsby"
 import { rhythm } from "../utils/typography"
 
 let posts
-
-Modal.setAppElement(`#___gatsby`)
 
 class GatsbyGramModal extends React.Component {
   static propTypes = {
@@ -95,87 +92,59 @@ class GatsbyGramModal extends React.Component {
             posts = data.allPostsJson.edges.map(e => e.node)
           }
           return (
-            <Modal
-              isOpen={this.props.isOpen}
-              onRequestClose={() => push(`/`)}
-              style={{
-                overlay: {
-                  position: `fixed`,
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: `rgba(0, 0, 0, 0.75)`,
-                },
-                content: {
-                  position: `absolute`,
-                  border: `none`,
-                  background: `none`,
-                  padding: 0,
-                  top: 0,
-                  bottom: 0,
-                  right: 0,
-                  left: 0,
-                  overflow: `auto`,
-                  WebkitOverflowScrolling: `touch`,
-                },
+            <div
+              onClick={() => push(`/`)}
+              css={{
+                display: `flex`,
+                position: `relative`,
+                height: `100vh`,
               }}
-              contentLabel="Modal"
             >
               <div
-                onClick={() => push(`/`)}
                 css={{
                   display: `flex`,
-                  position: `relative`,
-                  height: `100vh`,
+                  alignItems: `center`,
+                  justifyItems: `center`,
+                  maxWidth: rhythm(40.25), // Gets it right around Instagram's maxWidth.
+                  margin: `auto`,
+                  width: `100%`,
                 }}
               >
-                <div
-                  css={{
-                    display: `flex`,
-                    alignItems: `center`,
-                    justifyItems: `center`,
-                    maxWidth: rhythm(40.25), // Gets it right around Instagram's maxWidth.
-                    margin: `auto`,
-                    width: `100%`,
-                  }}
-                >
-                  <CaretLeft
-                    data-testid="previous-post"
-                    css={{
-                      cursor: `pointer`,
-                      fontSize: `50px`,
-                      color: `rgba(255,255,255,0.7)`,
-                      userSelect: `none`,
-                    }}
-                    onClick={e => this.previous(e)}
-                  />
-                  {this.props.children}
-                  <CaretRight
-                    data-testid="next-post"
-                    css={{
-                      cursor: `pointer`,
-                      fontSize: `50px`,
-                      color: `rgba(255,255,255,0.7)`,
-                      userSelect: `none`,
-                    }}
-                    onClick={e => this.next(e)}
-                  />
-                </div>
-                <Close
-                  data-testid="modal-close"
-                  onClick={() => push(`/`)}
+                <CaretLeft
+                  data-testid="previous-post"
                   css={{
                     cursor: `pointer`,
-                    color: `rgba(255,255,255,0.8)`,
-                    fontSize: `30px`,
-                    position: `absolute`,
-                    top: rhythm(1 / 4),
-                    right: rhythm(1 / 4),
+                    fontSize: `50px`,
+                    color: `rgba(255,255,255,0.7)`,
+                    userSelect: `none`,
                   }}
+                  onClick={e => this.previous(e)}
+                />
+                {this.props.children}
+                <CaretRight
+                  data-testid="next-post"
+                  css={{
+                    cursor: `pointer`,
+                    fontSize: `50px`,
+                    color: `rgba(255,255,255,0.7)`,
+                    userSelect: `none`,
+                  }}
+                  onClick={e => this.next(e)}
                 />
               </div>
-            </Modal>
+              <Close
+                data-testid="modal-close"
+                onClick={() => push(`/`)}
+                css={{
+                  cursor: `pointer`,
+                  color: `rgba(255,255,255,0.8)`,
+                  fontSize: `30px`,
+                  position: `absolute`,
+                  top: rhythm(1 / 4),
+                  right: rhythm(1 / 4),
+                }}
+              />
+            </div>
           )
         }}
       />

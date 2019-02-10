@@ -26,7 +26,7 @@ class ReplaceComponentRenderer extends React.Component {
 
   render() {
     // render modal if props location has modal
-    const { pageResources, location, loader } = this.props
+    const { pageResources, location, modalProps } = this.props
     const { prevProps } = this.state
     const isModal = _.get(location, 'state.modal')
 
@@ -57,6 +57,7 @@ class ReplaceComponentRenderer extends React.Component {
         {pageElement}
 
         <Modal
+          {...modalProps}
           isOpen={!!modalElement}
         >
           {modalElement ? (
@@ -74,8 +75,9 @@ class ReplaceComponentRenderer extends React.Component {
 
 // You can delete this file if you're not using it
 //
-const replaceComponentRenderer = ({ props, loader }) => {
-  return React.createElement(ReplaceComponentRenderer, { ...props, loader })
+const replaceComponentRenderer = ({ props, loader }, opts) => {
+  const { modalProps } = opts
+  return React.createElement(ReplaceComponentRenderer, { ...props, loader, modalProps })
 }
 
 export default replaceComponentRenderer

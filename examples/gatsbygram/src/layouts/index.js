@@ -2,6 +2,7 @@ import * as PropTypes from "prop-types"
 import React from "react"
 import CameraIcon from "react-icons/lib/fa/camera-retro"
 import { Link, PageRenderer } from "gatsby"
+import GatsbyGramModal from "../components/modal"
 
 // Load the css for the Space Mono font.
 import "typeface-space-mono"
@@ -48,9 +49,9 @@ class Layout extends React.Component {
       //     }
 
     return isModal ? (
-      <React.Fragment>
+      <GatsbyGramModal>
         {this.props.children}
-      </React.Fragment>
+      </GatsbyGramModal>
     ) : (
       <div
         css={{
