@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-modal-routing",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "Gatsby plugin to enable routing of modal pages",
   "main": "index.js",
   "scripts": {

@@ -4,15 +4,14 @@ import { Link } from 'gatsby-plugin-modal-routing'
 import ConditionalLayout from "../components/ConditionalLayout"
 import SEO from "../components/seo"
 
-const SecondPage = () => (
+const ThirdPage = () => (
   <ConditionalLayout>
-    <SEO title="Page two" />
-    <h1>Hi from the second page</h1>
-    <p>Welcome to page 2</p>
-
+    <SEO title="Page three" />
+    <h1>Hi from the third page</h1>
+    <p>Welcome to page 3</p>
     <ul>
-      <li><Link to="/page-3/">Go to page 3</Link></li>
-      <li><Link to="/page-3/" asModal>Go to page 3 modal</Link></li>
+      <li><Link to="/page-2/">Go to page 2</Link></li>
+      <li><Link to="/page-2/" asModal>Go to page 2 modal</Link></li>
       <li><Link to="/">Go back to the homepage</Link></li>
     </ul>
 
@@ -28,4 +27,4 @@ const SecondPage = () => (
   </ConditionalLayout>
 )
 
-export default SecondPage
+export default ThirdPage

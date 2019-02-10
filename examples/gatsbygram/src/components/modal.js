@@ -93,7 +93,7 @@ class GatsbyGramModal extends React.Component {
           }
           return (
             <div
-              onClick={() => navigate(`/`)}
+              onClick={() => navigate(`/`, { state: { noScroll: true }})}
               css={{
                 display: `flex`,
                 position: `relative`,
@@ -134,7 +134,7 @@ class GatsbyGramModal extends React.Component {
               </div>
               <Close
                 data-testid="modal-close"
-                onClick={() => navigate(`/`)}
+                onClick={() => navigate(`/`, { state: { noScroll: true }})}
                 css={{
                   cursor: `pointer`,
                   color: `rgba(255,255,255,0.8)`,
