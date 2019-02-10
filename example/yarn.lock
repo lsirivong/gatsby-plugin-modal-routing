@@ -697,7 +697,14 @@
     "@babel/plugin-transform-react-jsx-self" "^7.0.0"
     "@babel/plugin-transform-react-jsx-source" "^7.0.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2":
+"@babel/runtime@^7.0.0":
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
+  integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
+"@babel/runtime@^7.1.2":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
   integrity sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==
@@ -4637,9 +4644,9 @@ gatsby-plugin-manifest@^2.0.17:
     sharp "^0.21.3"
 
 gatsby-plugin-modal-routing@^1.0.0-alpha.1:
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-modal-routing/-/gatsby-plugin-modal-routing-1.0.0-alpha.1.tgz#50187669f07e8829b84b227e318ebcf245ab8cb4"
-  integrity sha512-qlMsy1zJhGmK/T/hAiSNMwoYP7Mx1yWehn/gXZryhII5Ib4hqaUSSDP7YNHR+SbTXkRo2V/KuWsp1Fmy0W4+vQ==
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-modal-routing/-/gatsby-plugin-modal-routing-1.0.0-alpha.2.tgz#02366956654c5eb207e745d562f692116812c3ab"
+  integrity sha512-a7J5ppqxnbhp/ZfJt/+oWVOQYLUWofx/k2EKE5upJAKwN/Yiyl1A9NqEF8RIXVqa44aMY+OBPln+lWoSBLfwzg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     lodash "^4.17.11"
