@@ -11,17 +11,6 @@ class PostTemplate extends React.Component {
     }),
   }
   render() {
-    //     let isModal = false
-    //     // We don't want to show the modal if a user navigates
-    //     // directly to a post so if this code is running on Gatsby's
-    //     // initial render then we don't show the modal, otherwise we
-    //     // do.
-    //     if (
-    //       typeof window !== `undefined` &&
-    //       window.___GATSBYGRAM_INITIAL_RENDER_COMPLETE
-    //     ) {
-    //       isModal = true
-    //     }
     const { modal } = this.props
     return (
       <Layout location={this.props.location} isModal={modal}>
