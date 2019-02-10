@@ -10,3 +10,5 @@ const shouldUpdateScroll = ({
   // const closingModal = location.pathname === root pathname of the modal...
   return !isModal && !wasModal
 }
+
+export default shouldUpdateScroll
