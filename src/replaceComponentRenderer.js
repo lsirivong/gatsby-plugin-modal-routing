@@ -31,12 +31,12 @@ class ReplaceComponentRenderer extends React.Component {
     // render modal if props location has modal
     const { pageResources, location, modalProps } = this.props
     const { prevProps } = this.state
-    const isModal = _.get(location, 'state.modal')
+    const isModal = prevProps && _.get(location, 'state.modal')
 
-    const resources = prevProps && isModal ?
+    const resources = isModal ?
       prevProps.pageResources : pageResources
 
-    const pageElement = prevProps && isModal ? (
+    const pageElement = isModal ? (
       React.createElement(prevProps.pageResources.component, {
         ...prevProps,
         key: prevProps.pageResources.page.path,

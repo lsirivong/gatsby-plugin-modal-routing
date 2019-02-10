@@ -10,11 +10,6 @@ import "typeface-space-mono"
 import { rhythm, scale } from "../utils/typography"
 import presets from "../utils/presets"
 
-// let Modal
-// import(`../components/modal`).then(modal => {
-//   Modal = modal.default
-// })
-
 let windowWidth
 
 class Layout extends React.Component {
@@ -23,30 +18,8 @@ class Layout extends React.Component {
     isModal: PropTypes.bool,
   }
 
-  componentDidMount() {
-    console.log('LAYOUT MOUNT', this.props.location)
-  }
-
   render() {
     const { location, isModal } = this.props
-    //     let isModal = false
-    //     if (!windowWidth && typeof window !== `undefined`) {
-    //       windowWidth = window.innerWidth
-    //     }
-    //     if (this.props.isModal && windowWidth > 750) {
-    //       isModal = true
-    //     }
-    // 
-    //     if (isModal && Modal) {
-    //       return (
-    //         <React.Fragment>
-    //           <PageRenderer location={{ pathname: `/` }} />
-    //           <Modal isOpen={true} location={location}>
-      //             {this.props.children}
-      //           </Modal>
-    //         </React.Fragment>
-      //       )
-      //     }
 
     return isModal ? (
       <GatsbyGramModal
