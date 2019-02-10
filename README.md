@@ -2,6 +2,11 @@
 
 Adds support for viewing gatsby pages within modals at their gatsby defined routes.
 
+## Examples
+
+- https://gatsby-starter-with-gatsby-plugin-modal-routing.netlify.com/
+- https://gatsbygram-with-gatsby-plugin-modal-routing.netlify.com/
+
 ## Install
 
 ```
@@ -58,11 +63,18 @@ module.exports = {
 
 ### Rendering page content in modals
 
-Your gatsby pages will now recieve these props:
+Any gatsby page may be rendered in a modal if it is routed to appropriately (see next
+section below for creating a modal link).
+
+The `ModalRoutingContext` React.Context component can be used to conditionally render
+content if the page is rendered in a modal.
+
+The Context consumer is passes an object with `modal` and `closeTo` properties to it's
+child render function
 
 - `modal` (`boolean`) - indicates if the page content will be rendered in a modal. Use
 this to conditionally render modal content like a close button.
-- `modalCloseTo` (`string`) - if the page content is rendering in a modal, denotes the
+- `closeTo` (`string`) - if the page content is rendering in a modal, denotes the
 pathname of the page where the modal was opened, otherwise `null`.
 
 Example:
@@ -72,25 +84,30 @@ Example:
 
 import React from 'react'
 import { Link } from 'gatsby'
+import { ModalRoutingContext } from 'gatsby-plugin-modal-routing'
 
-const ModalExamplePage = ({ modal = false, modalCloseTo = null }) => (
-  </div>
-    {modal ? (
-      <Link to={modalCloseTo}>
-        Close
-      </Link>
-    ) : (
-      <header>
-        <h1>
-          Website Title
-        </h1>
-      </header>
+const ModalExamplePage = () => (
+  <ModalRoutingContext>
+    {({ modal, closeTo }) => (
+      <div>
+        {modal ? (
+          <Link to={modalCloseTo}>
+            Close
+          </Link>
+        ) : (
+          <header>
+            <h1>
+              Website Title
+            </h1>
+          </header>
+        )}
+
+        <h2>Modal Page</h2>
+
+        <Link to="/">Go back to the homepage</Link>
+      </div>
     )}
-
-    <h2>Modal Page</h2>
-
-    <Link to="/">Go back to the homepage</Link>
-  </div>
+  </ModalRoutingContext>
 )
 
 exports default ModalExamplePage
@@ -98,7 +115,7 @@ exports default ModalExamplePage
 
 ### Opening a page in a modal
 
-Pass `{ modal: true }` as Link state to open the pathname in a modal.
+Pages can be opened in a modal context by passing the `{ modal: true }` flag to Link state.
 
 Example:
 
@@ -119,7 +136,67 @@ import { Link } from 'gatsby'
 </Link>
 ```
 
-## Examples
+`gatsby-plugin-modal-routing` also provides a `Link` component as a convenience to encapsulate
+this flag for you.
 
-- https://gatsby-starter-with-gatsby-plugin-modal-routing.netlify.com/
-- https://gatsbygram-with-gatsby-plugin-modal-routing.netlify.com/
+This is equivalent to the example above:
+
+```
+// src/components/some-component.js
+
+import { Link } from 'gatsby-plugin-modal-routing'
+
+...
+
+<Link
+  to="/login/"
+  asModal
+>
+  Login
+</Link>
+```
+
+## Scroll State
+
+When the site opens a modal, gatsby's default scroll update is prevented, so that the
+underlying page remains scrolled at the same position.
+
+When routing to a non-modal page **from** a modal, gatsby's default scroll update is
+allowed, causing the page to scroll to the top. This is the case even if the non-modal
+page is the same as the underlying page.
+
+To prevent this, pass the `{ noScroll: true }` flag to Link state.
+
+```
+// src/components/modal-content.js
+
+import { Link } from 'gatsby'
+
+...
+
+<Link
+  to="/"
+  state={{
+    noScroll: true
+  }}
+>
+  Close Modal
+</Link>
+```
+
+As a convenience, this plugin's `Link` component will detect if the `to` pathname matches the
+content rendered under the modal and set the `noScroll` flag for you.
+
+```
+// src/components/modal-content.js
+
+import { Link } from 'gatsby-plugin-modal-routing'
+
+...
+
+<Link
+  to="/"
+>
+  Close Modal
+</Link>
+```
