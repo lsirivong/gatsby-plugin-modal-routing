@@ -1,7 +1,7 @@
 {
   "name": "gatsby-plugin-modal-routing",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.0-alpha.1",
+  "description": "Gatsby plugin to enable routing of modal pages",
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir . --ignore **/__tests__",
@@ -9,10 +9,19 @@
   },
   "keywords": [
     "gatsby",
-    "gatsby-plugin"
+    "gatsby-plugin",
+    "modal",
+    "routing"
   ],
   "author": "Lenny Sirivong <lenny@lenny-s.com> (https://lenny-s.com)",
-  "license": "ISC",
+  "license": "MIT",
+  "homepage": "https://github.com/lsirivong/gatsby-plugin-modal-routing",
+  "bugs": "https://github.com/lsirivong/gatsby-plugin-modal-routing/issues",
+  "repository": {
+    "url": "https://github.com/lsirivong/gatsby-plugin-modal-routing",
+    "type": "git"
+  },
+  "files": ["/*.js"],
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "react-modal": "^3.8.1"
