@@ -1,23 +1,24 @@
 import React from "react"
-import { Link } from "gatsby-plugin-modal-routing"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
+import ConditionalLayout from "../components/ConditionalLayout"
 import SEO from "../components/seo"
+import { Link } from 'gatsby-plugin-modal-routing'
 
-const IndexPage = ({ location, modal = false, modalCloseTo = null }) => (
-  <Layout location={location}>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>
-      <Link to="/page-2/">Go to page 2</Link>
-    </p>
-    <p>
-      <Link to="/page-2/" asModal>Page 2 in Modal</Link>
-    </p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
+const ThirdPage = ({ location, modal = false, modalCloseTo = null }) => (
+  <ConditionalLayout location={location} condition={!modal}>
+    {modal && (
+      <Link to={modalCloseTo}>
+        Close
+      </Link>
+    )}
+    <SEO title="Page three" />
+    <h1>Hi from the third page {modal && "MODAL!"}</h1>
+    <p>Welcome to page 3</p>
+    <ul>
+      <li><Link to="/page-2/">Go to page 2</Link></li>
+      <li><Link to="/page-2/" asModal>Go to page 2 modal</Link></li>
+      <li><Link to="/">Go back to the homepage</Link></li>
+    </ul>
 
     <p>Eos ea veniam deleniti possimus tenetur itaque doloremque eveniet. Et voluptatibus velit voluptatem facere. Provident sint similique architecto consequuntur nulla ut rerum nesciunt.</p>
 
@@ -28,7 +29,7 @@ const IndexPage = ({ location, modal = false, modalCloseTo = null }) => (
     <p>Sit error rerum est deleniti quos. Libero consequatur qui voluptatem excepturi nulla corporis. Totam occaecati laboriosam voluptate reiciendis id enim cum. Voluptatem aliquam impedit commodi minima sint rerum omnis. Totam ratione culpa soluta tempore dolores quibusdam.</p>
 
     <p>Est quia omnis delectus fuga inventore. Perferendis aut aperiam magni adipisci. Adipisci alias est natus omnis.</p>
-  </Layout>
+  </ConditionalLayout>
 )
 
-export default IndexPage
+export default ThirdPage

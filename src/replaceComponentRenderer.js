@@ -1,14 +1,15 @@
 import _ from 'lodash'
 import React from 'react'
 import Modal from 'react-modal'
+import ModalRoutingContext from './ModalRoutingContext'
 
 class ReplaceComponentRenderer extends React.Component {
   state = {
-    prevPageResources: null,
+    prevProps: null,
+    props: null,
     pathname: null,
   }
 
-  // TODO: track location prop change
   constructor(...args) {
     super(...args)
   }
@@ -21,7 +22,7 @@ class ReplaceComponentRenderer extends React.Component {
         props: props,
         // only set as prev props if not a modal
         ...(!_.get(state, 'props.location.state.modal') && {
-          prevProps:  state.props
+          prevProps: state.props
         })
       }
     }
@@ -67,7 +68,11 @@ class ReplaceComponentRenderer extends React.Component {
             <React.Fragment
               key={this.props.location.key}
             >
-              {modalElement}
+              <ModalRoutingContext.Provider
+                value={{ modal: isModal, closeTo: prevProps.location.pathname }}
+              >
+                {modalElement}
+              </ModalRoutingContext.Provider>
             </React.Fragment>
           ) : null}
         </Modal>
@@ -76,11 +81,9 @@ class ReplaceComponentRenderer extends React.Component {
   }
 }
 
-// You can delete this file if you're not using it
-//
-const replaceComponentRenderer = ({ props, loader }, opts) => {
+const replaceComponentRenderer = ({ props }, opts) => {
   const { modalProps } = opts
-  return React.createElement(ReplaceComponentRenderer, { ...props, loader, modalProps })
+  return React.createElement(ReplaceComponentRenderer, { ...props, modalProps })
 }
 
 export default replaceComponentRenderer
