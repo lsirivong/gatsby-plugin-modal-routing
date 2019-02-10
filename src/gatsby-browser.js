@@ -1,7 +1,9 @@
-import replaceComponentRenderer from './lib/replaceComponentRenderer'
-import shouldUpdateScroll from './lib/shouldUpdateScroll'
+import replaceComponentRenderer from './replaceComponentRenderer'
+import shouldUpdateScroll from './shouldUpdateScroll'
+import onClientEntry from './onClientEntry'
 
 export {
+  onClientEntry,
   replaceComponentRenderer,
   shouldUpdateScroll
 }
