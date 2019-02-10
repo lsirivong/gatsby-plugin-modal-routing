@@ -1,6 +1,6 @@
 # Gatsbygram
 
-https://gatsbygram.gatsbyjs.org/
+https://gatsby-starter-with-gatsby-plugin-modal-routing.netlify.com/
 
 Built with Gatsby 2.0 as a demo of Gatsby's new built-in image processing
 capabilities.

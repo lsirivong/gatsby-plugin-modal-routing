@@ -4981,10 +4981,10 @@ gatsby-plugin-manifest@^2.0.2:
     bluebird "^3.5.0"
     sharp "^0.21.3"
 
-gatsby-plugin-modal-routing@^1.0.0-alpha.3:
-  version "1.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-modal-routing/-/gatsby-plugin-modal-routing-1.0.0-alpha.3.tgz#79938ef924aa531974a979cd5291d9791f6de2f5"
-  integrity sha512-ozoZ5aLImIA8gTW9yByl/dq7ZJm5cbBFhWGudAuQuc8piVvdDSsZ61MixJkPRRI2v809r1JQvnAtkjQ1fTM/Sw==
+gatsby-plugin-modal-routing@^1.0.0-alpha.4:
+  version "1.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-modal-routing/-/gatsby-plugin-modal-routing-1.0.0-alpha.4.tgz#d6a21184b20a14278325557cf4166cff673f740d"
+  integrity sha512-HDtSgAs3Twqfrv3aUQ4Ngc8TDpE0U16pJamwQgjKL6Y1sOVK7Lej3yLKHiOp3hhg9oFQBcpMXRojIU5xvirjJw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     lodash "^4.17.11"
