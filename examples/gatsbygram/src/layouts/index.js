@@ -49,7 +49,9 @@ class Layout extends React.Component {
       //     }
 
     return isModal ? (
-      <GatsbyGramModal>
+      <GatsbyGramModal
+        location={location}
+      >
         {this.props.children}
       </GatsbyGramModal>
     ) : (

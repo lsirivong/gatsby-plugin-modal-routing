@@ -19,7 +19,10 @@ class ReplaceComponentRenderer extends React.Component {
       return {
         pathname: props.location.pathname,
         props: props,
-        prevProps: state.props,
+        // only set as prev props if not a modal
+        ...(!_.get(state, 'props.location.state.modal') && {
+          prevProps:  state.props
+        })
       }
     }
   }

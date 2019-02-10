@@ -5,7 +5,7 @@ import Close from "react-icons/lib/md/close"
 import findIndex from "lodash/findIndex"
 import mousetrap from "mousetrap"
 import * as PropTypes from "prop-types"
-import { push, StaticQuery, graphql } from "gatsby"
+import { navigate, StaticQuery, graphql } from "gatsby"
 
 import { rhythm } from "../utils/typography"
 
@@ -52,7 +52,7 @@ class GatsbyGramModal extends React.Component {
       } else {
         nextPost = posts[currentIndex + 1]
       }
-      push(`/${nextPost.id}/`)
+      navigate(`/${nextPost.id}/`, { state: { modal: true }})
     }
   }
 
@@ -69,7 +69,7 @@ class GatsbyGramModal extends React.Component {
       } else {
         previousPost = posts[currentIndex - 1]
       }
-      push(`/${previousPost.id}/`)
+      navigate(`/${previousPost.id}/`, { state: { modal: true }})
     }
   }
 
@@ -93,7 +93,7 @@ class GatsbyGramModal extends React.Component {
           }
           return (
             <div
-              onClick={() => push(`/`)}
+              onClick={() => navigate(`/`)}
               css={{
                 display: `flex`,
                 position: `relative`,
@@ -134,7 +134,7 @@ class GatsbyGramModal extends React.Component {
               </div>
               <Close
                 data-testid="modal-close"
-                onClick={() => push(`/`)}
+                onClick={() => navigate(`/`)}
                 css={{
                   cursor: `pointer`,
                   color: `rgba(255,255,255,0.8)`,
