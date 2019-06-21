@@ -110,7 +110,7 @@ const ModalExamplePage = () => (
   </ModalRoutingContext>
 )
 
-exports default ModalExamplePage
+export default ModalExamplePage
 ```
 
 ### Opening a page in a modal
