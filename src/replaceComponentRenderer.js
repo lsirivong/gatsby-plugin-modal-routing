@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { navigate } from 'gatsby'
 import React from 'react'
 import Modal from 'react-modal'
 import ModalRoutingContext from './ModalRoutingContext'
@@ -26,6 +27,10 @@ class ReplaceComponentRenderer extends React.Component {
         })
       }
     }
+  }
+
+  handleRequestClose = () => {
+    navigate(this.state.prevProps.location.pathname)
   }
 
   render() {
@@ -59,6 +64,7 @@ class ReplaceComponentRenderer extends React.Component {
         {pageElement}
 
         <Modal
+          onRequestClose={this.handleRequestClose}
           {...modalProps}
           isOpen={!!modalElement}
         >
