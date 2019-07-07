@@ -30,7 +30,14 @@ class ReplaceComponentRenderer extends React.Component {
   }
 
   handleRequestClose = () => {
-    navigate(this.state.prevProps.location.pathname)
+    navigate(
+      this.state.prevProps.location.pathname,
+      {
+        state: {
+          noScroll: true
+        }
+      }
+    )
   }
 
   render() {
