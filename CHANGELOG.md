@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.2 (2019-07-07)
+
+- Prevent scroll reset when closing with `onRequestClose` ([#21](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/21))
+
 ## 1.0.1 (2019-07-07)
 
 - reduce lodash dependency size ([#20](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/20))
