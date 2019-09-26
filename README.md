@@ -91,7 +91,7 @@ const ModalExamplePage = () => (
     {({ modal, closeTo }) => (
       <div>
         {modal ? (
-          <Link to={modalCloseTo}>
+          <Link to={closeTo}>
             Close
           </Link>
         ) : (
