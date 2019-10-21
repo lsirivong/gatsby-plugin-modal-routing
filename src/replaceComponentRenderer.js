@@ -4,6 +4,14 @@ import React from 'react'
 import Modal from 'react-modal'
 import ModalRoutingContext from './ModalRoutingContext'
 
+const withoutPrefix = (path) => {
+  const prefix = typeof __BASE_PATH__ !== `undefined`
+    ? __BASE_PATH__
+    : __PATH_PREFIX__
+
+  return path.slice(prefix ? prefix.length : 0)
+}
+
 class ReplaceComponentRenderer extends React.Component {
   state = {
     prevProps: null,
@@ -31,7 +39,7 @@ class ReplaceComponentRenderer extends React.Component {
 
   handleRequestClose = () => {
     navigate(
-      this.state.prevProps.location.pathname,
+      withoutPrefix(this.state.prevProps.location.pathname),
       {
         state: {
           noScroll: true
@@ -80,7 +88,7 @@ class ReplaceComponentRenderer extends React.Component {
               key={this.props.location.key}
             >
               <ModalRoutingContext.Provider
-                value={{ modal: isModal, closeTo: prevProps.location.pathname }}
+                value={{ modal: isModal, closeTo: withoutPrefix(prevProps.location.pathname) }}
               >
                 {modalElement}
               </ModalRoutingContext.Provider>
