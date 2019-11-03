@@ -87,7 +87,7 @@ import { Link } from 'gatsby'
 import { ModalRoutingContext } from 'gatsby-plugin-modal-routing'
 
 const ModalExamplePage = () => (
-  <ModalRoutingContext>
+  <ModalRoutingContext.Consumer>
     {({ modal, closeTo }) => (
       <div>
         {modal ? (
@@ -107,7 +107,7 @@ const ModalExamplePage = () => (
         <Link to="/">Go back to the homepage</Link>
       </div>
     )}
-  </ModalRoutingContext>
+  </ModalRoutingContext.Consumer>
 )
 
 export default ModalExamplePage
