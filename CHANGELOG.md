@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Unreleased
+
+- Chore: upgrade dependencies
+- Remove examples directory, they now how their own repositories:
+  - https://github.com/lsirivong/gatsby-starter-with-gatsby-plugin-modal-routing
+  - https://github.com/lsirivong/gatsbygram-with-gatsby-plugin-modal-routing
+- Fix urls for gatsby projects that use `pathPrefix`  ([#30](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/30))
+- Fixed code example in README ([#28](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/28))
+
 ## 1.0.2 (2019-07-07)
 
 - Prevent scroll reset when closing with `onRequestClose` ([#21](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/21))
