@@ -19,6 +19,8 @@ class ReplaceComponentRenderer extends React.Component {
     pathname: null,
   }
 
+  modalContentRef = null
+
   constructor(...args) {
     super(...args)
   }
@@ -35,7 +37,19 @@ class ReplaceComponentRenderer extends React.Component {
         })
       }
     }
+
+    return null
   }
+
+  componentDidUpdate(prevProps) {
+    if (_.get(prevProps, 'location.pathname') !== _.get(this.props, 'location.pathname')
+      && _.get(this.props, 'location.state.modal')
+      && this.modalContentRef
+    ) {
+      this.modalContentRef.scrollTop = 0
+    }
+  }
+
 
   handleRequestClose = () => {
     navigate(
@@ -80,6 +94,7 @@ class ReplaceComponentRenderer extends React.Component {
 
         <Modal
           onRequestClose={this.handleRequestClose}
+          contentRef={node => this.modalContentRef = node}
           {...modalProps}
           isOpen={!!modalElement}
         >
