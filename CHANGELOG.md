@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.0.3 (2019-11-03)
 
 - Chore: upgrade dependencies
 - Remove examples directory, they now how their own repositories:
