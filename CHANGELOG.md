@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## unreleased
+
+- Fix: modal -> modal scroll state reset ([#39](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/39))
+- Docs: Fix context usage in readme ([#40](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/40))
+
 ## 1.0.3 (2019-11-03)
 
 - Chore: upgrade dependencies
