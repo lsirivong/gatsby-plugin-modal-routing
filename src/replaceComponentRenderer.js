@@ -88,28 +88,23 @@ class ReplaceComponentRenderer extends React.Component {
       })
     )
 
-    // the modal content is based on current modal state and last modal rendered
-    const modalElement = ((isModal, lastModalProps) => {
-      if (isModal) {
-        // Rendering the current page as a modal, so create an element with the page contents
-        return React.createElement(pageResources.component, {
-          ...this.props,
-          key: pageResources.page.path,
-        })
-      }
+    let modalElement = null
 
+    if (isModal) {
+      // Rendering the current page as a modal, so create an element with the page contents
+      modalElement = React.createElement(pageResources.component, {
+        ...this.props,
+        key: pageResources.page.path,
+      })
+    } else if (lastModalProps) {
       // Not rendering the current page as a modal, but we may be in the process of animating
       // the old modal content to close, so render the last modal content we have cached
-      if (lastModalProps) {
-        return React.createElement(_.get(lastModalProps, 'pageResources.component'), {
-          ...lastModalProps,
-          key: _.get(lastModalProps, 'pageResources.page.path'),
-        })
-      }
 
-      // Not rendering as a modal _and_ we don't have an old modal in the cache to render
-      return null
-    })(isModal, lastModalProps)
+      modalElement = React.createElement(_.get(lastModalProps, 'pageResources.component'), {
+        ...lastModalProps,
+        key: _.get(lastModalProps, 'pageResources.page.path'),
+      })
+    }
 
     return (
       <>
