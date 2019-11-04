@@ -2,6 +2,7 @@
 
 ## unreleased
 
+- Fix: render modal contents while modal is closing ([#41](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/41))
 - Fix: modal -> modal scroll state reset ([#39](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/39))
 - Docs: Fix context usage in readme ([#40](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/40))
 
