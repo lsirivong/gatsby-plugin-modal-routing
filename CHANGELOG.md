@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.0 (2019-11-28)
+
+- (no change from 1.1.0-beta)
+
 ## 1.1.0-beta (2019-11-03)
 
 - Fix: render modal contents while modal is closing ([#41](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/41))
