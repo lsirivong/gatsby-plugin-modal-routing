@@ -200,3 +200,5 @@ import { Link } from 'gatsby-plugin-modal-routing'
   Close Modal
 </Link>
 ```
+
+To prevent scrolling on the underlying page **after** navigation to a modal is complete, see [this thread](https://github.com/reactjs/react-modal/issues/191) for different strategies.
