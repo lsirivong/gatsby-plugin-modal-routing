@@ -26,8 +26,6 @@ a consistent rendering experience with a flexible API.
 
 ## How to use
 
-**Note that this plugin is currently in alpha, and this API is subject to change**
-
 Add the plugin to your `gatsby-config.js`:
 
 ```js
