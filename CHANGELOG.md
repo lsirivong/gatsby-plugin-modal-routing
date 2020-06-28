@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.2.0 (2020-06-28)
+
+- Fix undefined prevRouterProps reference ([#50](https://github.com/lsirivong/gatsby-plugin-modal-routing/pull/50) @misioq23)
+- Upgrade dependencies
+
 ## 1.1.0 (2019-11-28)
 
 - (no change from 1.1.0-beta)
