@@ -12,105 +12,102 @@ const withoutPrefix = (path) => {
   return path.slice(prefix ? prefix.length : 0)
 }
 
+// Creates the page element using the appropriate component type/props based on whether
+// we're in "modal mode" or not
+const buildPageElement = (isModal, prevProps, pageResources, props) => {
+  const { component, page } = isModal ? prevProps.pageResources : pageResources;
+  const pageElementProps = { ...(isModal ? prevProps : props), key: page.path };
+  return React.createElement(component, pageElementProps)
+}
+
+const buildModalElement = (isModal, lastModalProps, pageResources, props) => {
+  if (!isModal && !lastModalProps) return null
+
+  // isModal = rendering the current page as a modal (create an element with the page contents)
+  // !isModal = not rendering as a modal, but we may be in the process of animating  the old
+  // modal content to close, so render the last modal content we have cached
+  const { component } = isModal ? pageResources : _.get(lastModalProps, 'pageResources')
+  const modalElementProps = isModal ? props : lastModalProps
+  const { path } = isModal ? pageResources.page : _.get(lastModalProps, 'pageResources.page')
+  return React.createElement(component, { ...modalElementProps, key: path })
+}
+
 class ReplaceComponentRenderer extends React.Component {
   state = {
     prevProps: null,
     lastModalProps: null,
     props: null,
-    pathname: null,
+    pathname: null
   }
 
   modalContentRef = null
 
-  constructor(...args) {
-    super(...args)
+  constructor(props) {
+    super(props)
+    if (!props.modalComponentPath) this.state.ModalComponent = Modal;
   }
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(newProps, state) {
     // TODO: handle history changes
-    if (props.location.pathname !== state.pathname) {
-      return {
-        pathname: props.location.pathname,
-        props: props,
-        ...(_.get(state, 'props.location.state.modal') ? {
-          // old page was a modal, keep track so we can render the contents while closing
-          lastModalProps: state.props,
-        } : {
-          // old page was not a modal, keep track so we can render the contents under modals
-          prevProps: state.props,
-        }),
-      }
-    }
+    // Only update the (old) props in state if the location changed
+    if (newProps.location.pathname === state.pathname) return null
 
-    return null
+    const oldProps = state.props
+    const oldPageWasModal = _.get(state, 'props.location.state.modal')
+    return {
+      // ...state,
+      pathname: newProps.location.pathname,
+      props: newProps,
+      // if old page was a modal, keep track so we can render the contents while closing
+      // (otherwise keep track so we can render the contents under modals)
+      [oldPageWasModal ? 'lastModalProps' : 'prevProps']: oldProps
+    }
+  }
+
+  componentDidMount() {
+    if (!this.props.modalComponentPath) return;
+
+    // Access the component we loaded in gatsby-node.js
+    const ModalComponent = require(___MODAL_COMPONENT___).default
+    this.setState({ ModalComponent })
   }
 
   componentDidUpdate(prevProps) {
-    if (_.get(prevProps, 'location.pathname') !== _.get(this.props, 'location.pathname')
-      && _.get(this.props, 'location.state.modal')
-      && this.modalContentRef
-    ) {
-      this.modalContentRef.scrollTop = 0
-    }
+    const oldPath = _.get(prevProps, 'location.pathname')
+    const newPath = _.get(this.props, 'location.pathname')
+    const isModal = _.get(this.props, 'location.state.modal') && this.modalContentRef;
+    if (oldPath === newPath || !isModal) return;
+
+    this.modalContentRef.scrollTop = 0
   }
 
+  /** Returns the path of the previous page we were on, with the prefix removed */
+  getPreviousPathWithoutPrefix() {
+    return withoutPrefix(this.state.prevProps.location.pathname)
+  }
 
   handleRequestClose = () => {
-    navigate(
-      withoutPrefix(this.state.prevProps.location.pathname),
-      {
-        state: {
-          noScroll: true
-        }
-      }
-    )
+    const state = { noScroll: true }
+    navigate(this.getPreviousPathWithoutPrefix(), { state })
   }
 
   render() {
     // render modal if props location has modal
     const { pageResources, location, modalProps } = this.props
-    const { prevProps, lastModalProps } = this.state
+    const { ModalComponent, prevProps, lastModalProps } = this.state
+    if (!ModalComponent) return null // we're waiting for the modal component to load
+
     const isModal = prevProps && _.get(location, 'state.modal')
 
-    const resources = isModal ?
-      prevProps.pageResources : pageResources
+    // const resources = isModal ? prevProps.pageResources : pageResources
 
     // the page is the previous path if this is a modal, otherwise it's the current path
-    const pageElement = isModal ? (
-      React.createElement(prevProps.pageResources.component, {
-        ...prevProps,
-        key: prevProps.pageResources.page.path,
-      })
-    ) : (
-      React.createElement(pageResources.component, {
-        ...this.props,
-        key: pageResources.page.path,
-      })
-    )
-
-    let modalElement = null
-
-    if (isModal) {
-      // Rendering the current page as a modal, so create an element with the page contents
-      modalElement = React.createElement(pageResources.component, {
-        ...this.props,
-        key: pageResources.page.path,
-      })
-    } else if (lastModalProps) {
-      // Not rendering the current page as a modal, but we may be in the process of animating
-      // the old modal content to close, so render the last modal content we have cached
-
-      modalElement = React.createElement(_.get(lastModalProps, 'pageResources.component'), {
-        ...lastModalProps,
-        key: _.get(lastModalProps, 'pageResources.page.path'),
-      })
-    }
-
+    const pageElement = buildPageElement(isModal, prevProps, pageResources, this.props)
+    const modalElement = buildModalElement(isModal, lastModalProps, pageResources, this.props)
     return (
       <>
         {pageElement}
-
-        <Modal
+        <ModalComponent
           onRequestClose={this.handleRequestClose}
           contentRef={node => this.modalContentRef = node}
           {...modalProps}
@@ -123,22 +120,23 @@ class ReplaceComponentRenderer extends React.Component {
               <ModalRoutingContext.Provider
                 value={{
                   modal: true,
-                  closeTo: prevProps ? withoutPrefix(prevProps.location.pathname) : '/'
+                  closeTo: prevProps ? this.getPreviousPathWithoutPrefix() : '/'
                 }}
               >
                 {modalElement}
               </ModalRoutingContext.Provider>
             </React.Fragment>
           ) : null}
-        </Modal>
+        </ModalComponent>
       </>
     )
   }
 }
 
-const replaceComponentRenderer = ({ props }, opts) => {
-  const { modalProps } = opts
-  return React.createElement(ReplaceComponentRenderer, { ...props, modalProps })
+const replaceComponentRenderer = ({ props }, pluginOptions) => {
+  const { modalComponentPath, modalProps } = pluginOptions
+  const mergedProps = { ...props, modalComponentPath, modalProps }
+  return React.createElement(ReplaceComponentRenderer, mergedProps)
 }
 
 export default replaceComponentRenderer
