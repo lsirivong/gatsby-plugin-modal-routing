@@ -12,7 +12,7 @@ const withoutPrefix = (path) => {
   return path.slice(prefix ? prefix.length : 0)
 }
 
-class ReplaceComponentRenderer extends React.Component {
+class WrapPageElement extends React.Component {
   state = {
     prevProps: null,
     lastModalProps: null,
@@ -136,9 +136,9 @@ class ReplaceComponentRenderer extends React.Component {
   }
 }
 
-const replaceComponentRenderer = ({ props }, opts) => {
+const wrapPageElement = ({ props }, opts) => {
   const { modalProps } = opts
-  return React.createElement(ReplaceComponentRenderer, { ...props, modalProps })
+  return React.createElement(WrapPageElement, { ...props, modalProps })
 }
 
-export default replaceComponentRenderer
+export default wrapPageElement
